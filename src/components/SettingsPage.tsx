@@ -14,57 +14,62 @@ export default function SettingsPage({ onBack }: SettingsPageProps) {
       exit={{ opacity: 0, x: -20 }}
       className="flex-1 flex flex-col bg-[var(--bg-main)] overflow-y-auto"
     >
-      <header className="h-20 flex items-center justify-between px-8 border-b border-[var(--card-border)] bg-[var(--bg-main)]/50 backdrop-blur-2xl sticky top-0 z-10">
-        <div className="flex items-center gap-4">
+      <header className="h-20 flex items-center justify-between px-4 md:px-8 border-b border-[var(--card-border)] bg-[var(--bg-main)]/50 backdrop-blur-2xl sticky top-0 z-10">
+        <div className="flex items-center gap-2 md:gap-4">
           <motion.button 
             whileHover={{ scale: 1.1, x: -2 }}
             whileTap={{ scale: 0.9 }}
             onClick={onBack}
-            className="p-2.5 bg-[var(--card-bg)] border border-[var(--card-border)] rounded-xl transition-all text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-stream)]"
+            className="p-2 md:p-2.5 bg-[var(--card-bg)] border border-[var(--card-border)] rounded-xl transition-all text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-stream)] cf-focus min-w-[44px] min-h-[44px] flex items-center justify-center"
+            aria-label="Go back"
           >
-            <ArrowLeft className="w-5 h-5" />
+            <ArrowLeft className="w-4 h-4 md:w-5 md:h-5" aria-hidden="true" />
           </motion.button>
           <div>
-            <h2 className="text-lg font-bold text-[var(--text-main)] tracking-tight leading-none">System Settings</h2>
-            <p className="micro-label mt-1 text-[var(--text-secondary)]">Configure your workspace</p>
+            <h2 className="text-base md:text-lg font-bold text-[var(--text-main)] tracking-tight leading-none">System Settings</h2>
+            <p className="micro-label mt-1 text-[var(--text-secondary)] hidden sm:block">Configure your workspace</p>
           </div>
         </div>
         <motion.button 
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className="px-6 py-2.5 bg-[var(--accent-human)] text-white rounded-full text-xs font-bold luminous-button flex items-center gap-2"
+          className="px-4 md:px-6 py-2 md:py-2.5 bg-[var(--accent-human)] text-white rounded-full text-xs font-bold luminous-button flex items-center gap-2 cf-focus min-h-[44px]"
         >
-          <Save className="w-3.5 h-3.5" />
-          Save Changes
+          <Save className="w-3.5 h-3.5" aria-hidden="true" />
+          <span className="hidden sm:inline">Save Changes</span>
+          <span className="sm:hidden">Save</span>
         </motion.button>
       </header>
 
-      <div className="max-w-4xl mx-auto w-full p-12 space-y-12">
+      <div className="max-w-4xl mx-auto w-full p-4 md:p-12 space-y-8 md:space-y-12">
         {/* Profile Section */}
         <section className="space-y-6">
           <div className="flex items-center gap-3 px-2">
             <User className="w-4 h-4 text-[var(--accent-human)]" />
             <span className="micro-label text-[var(--text-secondary)]">Identity</span>
           </div>
-          <div className="glass-card p-8 space-y-8 border-[var(--card-border)]">
-            <div className="flex items-center gap-8">
+          <div className="glass-card p-4 md:p-8 space-y-8 border-[var(--card-border)]">
+            <div className="flex flex-col md:flex-row items-center md:items-start gap-6 md:gap-8">
               <div className="relative group">
-                <div className="w-24 h-24 rounded-[2rem] overflow-hidden border-2 border-[var(--card-border)] group-hover:border-[var(--accent-human)]/50 transition-all duration-500">
+                <div className="w-20 h-20 md:w-24 md:h-24 rounded-[2rem] overflow-hidden border-2 border-[var(--card-border)] group-hover:border-[var(--accent-human)]/50 transition-all duration-500">
                   <img src="https://picsum.photos/seed/alex/200/200" alt="Alex" className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" />
                 </div>
-                <button className="absolute -bottom-2 -right-2 w-8 h-8 bg-[var(--accent-human)] rounded-full flex items-center justify-center border-2 border-[var(--bg-main)] shadow-lg hover:scale-110 transition-transform">
-                  <Zap className="w-4 h-4 text-white" />
+                <button 
+                  className="absolute -bottom-2 -right-2 w-8 h-8 bg-[var(--accent-human)] rounded-full flex items-center justify-center border-2 border-[var(--bg-main)] shadow-lg hover:scale-110 transition-transform cf-focus min-w-[44px] min-h-[44px]"
+                  aria-label="Update profile picture"
+                >
+                  <Zap className="w-4 h-4 text-white" aria-hidden="true" />
                 </button>
               </div>
-              <div className="flex-1 space-y-4">
-                <div className="grid grid-cols-2 gap-4">
+              <div className="flex-1 space-y-4 w-full">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1.5">
                     <label className="text-[10px] font-bold text-[var(--text-secondary)] uppercase tracking-widest ml-1">Full Name</label>
-                    <input type="text" defaultValue="Alex Rivera" className="w-full bg-[var(--card-bg)] border border-[var(--card-border)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-main)] focus:outline-none focus:border-[var(--accent-human)]/30 transition-all" />
+                    <input type="text" defaultValue="Alex Rivera" className="w-full bg-[var(--card-bg)] border border-[var(--card-border)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-main)] focus:outline-none focus:border-[var(--accent-human)]/30 transition-all cf-focus min-h-[44px]" />
                   </div>
                   <div className="space-y-1.5">
                     <label className="text-[10px] font-bold text-[var(--text-secondary)] uppercase tracking-widest ml-1">Title</label>
-                    <input type="text" defaultValue="Lead Architect" className="w-full bg-[var(--card-bg)] border border-[var(--card-border)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-main)] focus:outline-none focus:border-[var(--accent-human)]/30 transition-all" />
+                    <input type="text" defaultValue="Lead Architect" className="w-full bg-[var(--card-bg)] border border-[var(--card-border)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-main)] focus:outline-none focus:border-[var(--accent-human)]/30 transition-all cf-focus min-h-[44px]" />
                   </div>
                 </div>
               </div>

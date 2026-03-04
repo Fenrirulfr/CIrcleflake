@@ -40,8 +40,8 @@ export default function DashboardView() {
   return (
     <div className="flex-1 flex flex-col h-full bg-[var(--bg-stream)] overflow-y-auto">
       {/* Header */}
-      <header className="h-20 flex items-center justify-between px-8 border-b border-[var(--card-border)] bg-[var(--bg-main)]/80 backdrop-blur-md sticky top-0 z-10">
-        <div className="relative w-96">
+      <header className="h-20 flex items-center justify-between px-4 md:px-8 border-b border-[var(--card-border)] bg-[var(--bg-main)]/80 backdrop-blur-md sticky top-0 z-10">
+        <div className="relative w-full max-w-[200px] sm:max-w-xs md:max-w-sm lg:w-96">
           <Search className="w-4 h-4 absolute left-4 top-1/2 -translate-y-1/2 text-[var(--text-secondary)]" aria-hidden="true" />
           <input 
             type="text" 
@@ -67,7 +67,7 @@ export default function DashboardView() {
         </div>
       </header>
 
-      <div className="flex-1 p-8 max-w-7xl mx-auto w-full space-y-8">
+      <div className="flex-1 p-4 md:p-8 max-w-7xl mx-auto w-full space-y-8">
         {/* Hero Section: Workspace Health */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}

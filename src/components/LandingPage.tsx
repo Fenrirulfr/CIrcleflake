@@ -17,13 +17,13 @@ export default function LandingPage({ onGetStarted, onNavigate, isDarkMode, togg
     <div className="min-h-screen bg-[var(--bg-main)] text-[var(--text-main)] selection:bg-electric-indigo/30 overflow-x-hidden transition-colors duration-300">
       {/* Navigation */}
       <nav className="fixed top-0 w-full z-50 border-b border-[var(--card-border)] bg-[var(--bg-main)]/50 backdrop-blur-2xl transition-colors duration-300">
-        <div className="max-w-7xl mx-auto px-8 h-24 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <Logo size={44} className="agent-glow" />
-            <span className="text-xl font-bold text-[var(--text-main)] tracking-tighter">Circleflake</span>
+        <div className="max-w-7xl mx-auto px-4 md:px-8 h-20 md:h-24 flex items-center justify-between">
+          <div className="flex items-center gap-2 md:gap-3">
+            <Logo size={36} className="agent-glow md:w-11 md:h-11" />
+            <span className="text-lg md:text-xl font-bold text-[var(--text-main)] tracking-tighter">Circleflake</span>
           </div>
 
-          <div className="flex items-center gap-8">
+          <div className="flex items-center gap-4 md:gap-8">
             <div className="hidden md:flex items-center gap-8 text-sm font-medium text-[var(--text-secondary)]">
               <button 
                 onClick={() => onNavigate('capabilities')} 
@@ -45,7 +45,7 @@ export default function LandingPage({ onGetStarted, onNavigate, isDarkMode, togg
               </button>
             </div>
             
-            <div className="flex items-center">
+            <div className="flex items-center scale-75 md:scale-100 origin-right">
               <ThemeToggle isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
             </div>
 
@@ -53,7 +53,7 @@ export default function LandingPage({ onGetStarted, onNavigate, isDarkMode, togg
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={onGetStarted}
-              className="px-6 py-2.5 bg-[var(--accent-human)] text-white rounded-full font-bold text-sm shadow-[0_0_20px_rgba(99,102,241,0.3)] hover:shadow-[0_0_30px_rgba(99,102,241,0.5)] transition-all"
+              className="px-4 md:px-6 py-2 md:py-2.5 bg-[var(--accent-human)] text-white rounded-full font-bold text-xs md:text-sm shadow-[0_0_20px_rgba(99,102,241,0.3)] hover:shadow-[0_0_30px_rgba(99,102,241,0.5)] transition-all cf-focus min-h-[44px]"
             >
               Launch App
             </motion.button>
@@ -96,7 +96,7 @@ export default function LandingPage({ onGetStarted, onNavigate, isDarkMode, togg
             <span className="inline-block px-5 py-2 rounded-full bg-[var(--card-bg)] border border-[var(--card-border)] micro-label text-[var(--accent-ai)] mb-8">
               Next-Gen Intelligence Hub
             </span>
-            <h1 className="text-7xl md:text-[10rem] font-bold text-[var(--text-main)] tracking-tighter leading-[0.85] mb-10">
+            <h1 className="text-5xl sm:text-7xl md:text-[10rem] font-bold text-[var(--text-main)] tracking-tighter leading-[0.85] mb-10">
               Unified <span className="italic font-serif text-transparent bg-clip-text bg-gradient-to-r from-[var(--accent-human)] to-[var(--accent-ai)]">Intelligence</span>
             </h1>
             <p className="text-xl md:text-2xl text-[var(--text-secondary)] max-w-3xl mx-auto mb-14 leading-relaxed font-normal">

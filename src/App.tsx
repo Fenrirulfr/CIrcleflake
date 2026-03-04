@@ -14,7 +14,7 @@ import DashboardView from './components/DashboardView';
 import ProfilePage from './components/ProfilePage';
 import InfoPage, { InfoPageType } from './components/InfoPage';
 import { motion, AnimatePresence } from 'motion/react';
-import { Layout, MessageSquare, FileText, Bot, Settings, Search, AlertCircle, X } from 'lucide-react';
+import { Layout, MessageSquare, FileText, Bot, Settings, Search, AlertCircle, X, Menu } from 'lucide-react';
 import { useAIModel } from './hooks/useAIModel';
 import { useAgent } from './hooks/useAgent';
 import ProcessingOverlay from './components/ProcessingOverlay';
@@ -34,6 +34,7 @@ export default function App() {
   const [activeAsset, setActiveAsset] = useState<CMSAsset | null>(null);
   const [socket, setSocket] = useState<Socket | null>(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isAgentThinking, setIsAgentThinking] = useState(false);
   const [agentError, setAgentError] = useState<string | null>(null);
   const [isDarkMode, setIsDarkMode] = useState(() => {
@@ -426,6 +427,7 @@ export default function App() {
       <div className="grain-overlay" />
       
       <div className="flex w-full max-w-screen-2xl h-full relative">
+        {/* Desktop Sidebar */}
         <div className="hidden md:flex h-full">
           <Sidebar 
             channels={channels} 
@@ -442,6 +444,47 @@ export default function App() {
           />
         </div>
 
+        {/* Mobile Sidebar Overlay */}
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 md:hidden"
+                aria-hidden="true"
+              />
+              <motion.div
+                initial={{ x: '-100%' }}
+                animate={{ x: 0 }}
+                exit={{ x: '-100%' }}
+                transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+                className="fixed inset-y-0 left-0 z-50 flex md:hidden bg-[var(--sidebar-bg)] shadow-2xl"
+              >
+                <Sidebar 
+                  channels={channels} 
+                  activeChannel={activeChannel} 
+                  onChannelSelect={(id) => {
+                    setActiveChannel(id);
+                    setView('dashboard');
+                    setIsMobileMenuOpen(false);
+                  }}
+                  isOpen={true}
+                  activeView={view}
+                  onViewChange={(v) => {
+                    setView(v);
+                    setIsMobileMenuOpen(false);
+                  }}
+                  isDarkMode={isDarkMode}
+                  toggleTheme={toggleTheme}
+                />
+              </motion.div>
+            </>
+          )}
+        </AnimatePresence>
+
         <AnimatePresence mode="wait">
           <motion.div 
             key={view}
@@ -455,36 +498,44 @@ export default function App() {
         </AnimatePresence>
 
         {/* Mobile Bottom Navigation */}
-        <div className="md:hidden fixed bottom-0 left-0 right-0 h-[72px] bg-[var(--card-bg)] border-t border-[var(--card-border)] flex items-center justify-around px-4 z-50 pb-safe">
+        <div className="md:hidden fixed bottom-0 left-0 right-0 h-[72px] bg-[var(--card-bg)] border-t border-[var(--card-border)] flex items-center justify-around px-2 sm:px-4 z-30 pb-safe">
           <button 
             onClick={() => setView('dashboard')}
             className={cn(
-              "flex flex-col items-center justify-center min-w-[44px] min-h-[44px] gap-1 transition-colors cf-focus rounded-xl",
+              "flex flex-col items-center justify-center min-w-[44px] min-h-[44px] gap-1 transition-colors cf-focus rounded-xl flex-1",
               view === 'dashboard' ? "text-[var(--accent-human)]" : "text-[var(--text-secondary)]"
             )}
           >
-            <MessageSquare className="w-6 h-6" aria-hidden="true" />
+            <MessageSquare className="w-5 h-5 sm:w-6 sm:h-6" aria-hidden="true" />
             <span className="text-[10px] font-medium">Chat</span>
           </button>
           <button 
             onClick={() => setView('cms')}
             className={cn(
-              "flex flex-col items-center justify-center min-w-[44px] min-h-[44px] gap-1 transition-colors cf-focus rounded-xl",
+              "flex flex-col items-center justify-center min-w-[44px] min-h-[44px] gap-1 transition-colors cf-focus rounded-xl flex-1",
               view === 'cms' ? "text-[var(--accent-human)]" : "text-[var(--text-secondary)]"
             )}
           >
-            <FileText className="w-6 h-6" aria-hidden="true" />
+            <FileText className="w-5 h-5 sm:w-6 sm:h-6" aria-hidden="true" />
             <span className="text-[10px] font-medium">CMS</span>
           </button>
           <button 
             onClick={() => setView('automation')}
             className={cn(
-              "flex flex-col items-center justify-center min-w-[44px] min-h-[44px] gap-1 transition-colors cf-focus rounded-xl",
+              "flex flex-col items-center justify-center min-w-[44px] min-h-[44px] gap-1 transition-colors cf-focus rounded-xl flex-1",
               view === 'automation' ? "text-[var(--accent-human)]" : "text-[var(--text-secondary)]"
             )}
           >
-            <Bot className="w-6 h-6" aria-hidden="true" />
+            <Bot className="w-5 h-5 sm:w-6 sm:h-6" aria-hidden="true" />
             <span className="text-[10px] font-medium">Agents</span>
+          </button>
+          <button 
+            onClick={() => setIsMobileMenuOpen(true)}
+            className="flex flex-col items-center justify-center min-w-[44px] min-h-[44px] gap-1 transition-colors cf-focus rounded-xl flex-1 text-[var(--text-secondary)]"
+            aria-label="Open Menu"
+          >
+            <Menu className="w-5 h-5 sm:w-6 sm:h-6" aria-hidden="true" />
+            <span className="text-[10px] font-medium">Menu</span>
           </button>
         </div>
       </div>

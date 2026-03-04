@@ -26,8 +26,8 @@ export default function ProfilePage({ onBack }: ProfilePageProps) {
         </button>
       </div>
 
-      <div className="max-w-5xl mx-auto w-full px-8 -mt-24 relative z-10 pb-24">
-        <div className="flex flex-col md:flex-row gap-12 items-start">
+      <div className="max-w-5xl mx-auto w-full px-4 md:px-8 -mt-24 relative z-10 pb-24">
+        <div className="flex flex-col md:flex-row gap-8 md:gap-12 items-start">
           {/* Left Column: Profile Card */}
           <div className="w-full md:w-80 space-y-8">
             <div className="glass-card p-8 border-[var(--card-border)] shadow-2xl">

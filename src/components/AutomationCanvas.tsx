@@ -167,37 +167,39 @@ export default function AutomationCanvas({ onRunWorkflow }: AutomationCanvasProp
 
   return (
     <div className="flex-1 flex flex-col h-full bg-[var(--bg-main)]">
-      <header className="h-20 flex items-center justify-between px-8 border-b border-[var(--card-border)] bg-[var(--bg-main)]/80 backdrop-blur-md sticky top-0 z-10">
-        <div className="flex items-center gap-4">
-          <div className="w-10 h-10 rounded-xl bg-[var(--accent-ai)]/10 border border-[var(--accent-ai)]/20 flex items-center justify-center">
-            <Zap className="w-5 h-5 text-[var(--accent-ai)]" />
+      <header className="h-20 flex items-center justify-between px-4 md:px-8 border-b border-[var(--card-border)] bg-[var(--bg-main)]/80 backdrop-blur-md sticky top-0 z-10">
+        <div className="flex items-center gap-2 md:gap-4">
+          <div className="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-[var(--accent-ai)]/10 border border-[var(--accent-ai)]/20 flex items-center justify-center">
+            <Zap className="w-4 h-4 md:w-5 md:h-5 text-[var(--accent-ai)]" />
           </div>
           <div>
-            <h2 className="text-lg font-bold text-[var(--text-main)] tracking-tight leading-none">Automation Canvas</h2>
-            <p className="micro-label mt-1 text-[var(--text-secondary)]">Visual Workflow Builder</p>
+            <h2 className="text-base md:text-lg font-bold text-[var(--text-main)] tracking-tight leading-none">Automation Canvas</h2>
+            <p className="micro-label mt-1 text-[var(--text-secondary)] hidden sm:block">Visual Workflow Builder</p>
           </div>
         </div>
         
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 md:gap-3">
           <button 
             onClick={handleAddNode}
-            className="px-4 py-2 bg-[var(--card-bg)] border border-[var(--card-border)] rounded-xl text-sm font-medium text-[var(--text-main)] hover:border-[var(--accent-human)]/30 transition-colors flex items-center gap-2 shadow-sm cf-focus min-h-[44px]"
+            className="px-3 md:px-4 py-2 bg-[var(--card-bg)] border border-[var(--card-border)] rounded-xl text-sm font-medium text-[var(--text-main)] hover:border-[var(--accent-human)]/30 transition-colors flex items-center gap-2 shadow-sm cf-focus min-h-[44px]"
             aria-label="Add Node"
           >
             <Plus className="w-4 h-4" aria-hidden="true" />
-            Add Node
+            <span className="hidden sm:inline">Add Node</span>
+            <span className="sm:hidden">Add</span>
           </button>
           <button 
             onClick={handleRun}
             disabled={isRunning}
             className={cn(
-              "px-4 py-2 text-white rounded-xl text-sm font-medium transition-colors flex items-center gap-2 shadow-sm cf-focus min-h-[44px]",
+              "px-3 md:px-4 py-2 text-white rounded-xl text-sm font-medium transition-colors flex items-center gap-2 shadow-sm cf-focus min-h-[44px]",
               isRunning ? "bg-[var(--accent-ai)]/50 cursor-not-allowed" : "bg-[var(--accent-ai)] hover:bg-[var(--accent-ai)]/90 luminous-button"
             )}
             aria-label={isRunning ? 'Executing workflow' : 'Run Workflow'}
           >
             <Play className="w-4 h-4" aria-hidden="true" />
-            {isRunning ? 'Executing...' : 'Run Workflow'}
+            <span className="hidden sm:inline">{isRunning ? 'Executing...' : 'Run Workflow'}</span>
+            <span className="sm:hidden">{isRunning ? 'Run...' : 'Run'}</span>
           </button>
         </div>
       </header>

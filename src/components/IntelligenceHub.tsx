@@ -42,21 +42,21 @@ export default function IntelligenceHub() {
       animate={{ opacity: 1, y: 0 }}
       className="flex-1 flex flex-col bg-[var(--bg-main)] overflow-y-auto"
     >
-      <header className="h-20 flex items-center justify-between px-8 border-b border-[var(--card-border)] bg-[var(--bg-main)]/50 backdrop-blur-2xl sticky top-0 z-10">
-        <div className="flex items-center gap-4">
+      <header className="h-20 flex items-center justify-between px-4 md:px-8 border-b border-[var(--card-border)] bg-[var(--bg-main)]/50 backdrop-blur-2xl sticky top-0 z-10">
+        <div className="flex items-center gap-2 md:gap-4">
           <motion.div 
             whileHover={{ scale: 1.1, rotate: 5 }}
-            className="w-10 h-10 rounded-xl bg-[var(--accent-human)]/10 border border-[var(--accent-human)]/20 flex items-center justify-center agent-glow"
+            className="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-[var(--accent-human)]/10 border border-[var(--accent-human)]/20 flex items-center justify-center agent-glow"
           >
-            <Cpu className="w-5 h-5 text-[var(--accent-human)]" />
+            <Cpu className="w-4 h-4 md:w-5 md:h-5 text-[var(--accent-human)]" />
           </motion.div>
           <div>
-            <h2 className="text-lg font-bold text-[var(--text-main)] tracking-tight leading-none">Intelligence Hub</h2>
-            <p className="micro-label mt-1 text-[var(--text-secondary)]">Manage your agentic workforce</p>
+            <h2 className="text-base md:text-lg font-bold text-[var(--text-main)] tracking-tight leading-none">Intelligence Hub</h2>
+            <p className="micro-label mt-1 text-[var(--text-secondary)] hidden sm:block">Manage your agentic workforce</p>
           </div>
         </div>
-        <div className="flex items-center gap-4">
-          <div className="relative hidden md:block">
+        <div className="flex items-center gap-2 md:gap-4">
+          <div className="relative hidden lg:block">
             <Search className="w-4 h-4 absolute left-4 top-1/2 -translate-y-1/2 text-[var(--text-secondary)]" aria-hidden="true" />
             <input 
               type="text" 
@@ -65,24 +65,25 @@ export default function IntelligenceHub() {
               aria-label="Search agents"
             />
           </div>
-          <button className="px-6 py-2 bg-[var(--text-main)] text-[var(--bg-main)] rounded-full text-[10px] font-bold uppercase tracking-widest hover:bg-[var(--accent-ai)] transition-all cf-focus min-h-[44px]">
-            Deploy New Agent
+          <button className="px-4 md:px-6 py-2 bg-[var(--text-main)] text-[var(--bg-main)] rounded-full text-[10px] font-bold uppercase tracking-widest hover:bg-[var(--accent-ai)] transition-all cf-focus min-h-[44px]">
+            <span className="hidden sm:inline">Deploy New Agent</span>
+            <span className="sm:hidden">Deploy</span>
           </button>
         </div>
       </header>
 
-      <div className="max-w-7xl mx-auto w-full p-12 space-y-16">
+      <div className="max-w-7xl mx-auto w-full p-4 md:p-8 lg:p-12 space-y-12 lg:space-y-16">
         {/* Hero Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           <motion.div 
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="space-y-8"
+            className="space-y-6 lg:space-y-8"
           >
             <span className="inline-block px-4 py-1.5 rounded-full bg-[var(--accent-human)]/10 border border-[var(--accent-human)]/20 micro-label text-[var(--accent-human)]">
               Agentic Framework v2.4
             </span>
-            <h1 className="text-6xl font-bold text-[var(--text-main)] tracking-tighter leading-[0.9]">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[var(--text-main)] tracking-tighter leading-[0.9]">
               Your Team, <br />
               <span className="italic font-serif text-[var(--accent-ai)]">Augmented.</span>
             </h1>

@@ -49,7 +49,10 @@ export default function CMSLibrary({ assets, channels, onAssetSelect, onShare, o
   return (
     <div className="flex-1 flex h-full bg-[var(--bg-main)] overflow-hidden">
       {/* Left Column: Content Library */}
-      <div className="w-80 flex flex-col border-r border-[var(--card-border)] bg-[var(--sidebar-bg)]">
+      <div className={cn(
+        "w-full md:w-80 flex flex-col border-r border-[var(--card-border)] bg-[var(--sidebar-bg)]",
+        activeAsset ? "hidden md:flex" : "flex"
+      )}>
         <div className="p-6 border-b border-[var(--card-border)]">
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-lg font-bold text-[var(--text-main)] tracking-tight">Content Library</h2>
@@ -107,28 +110,39 @@ export default function CMSLibrary({ assets, channels, onAssetSelect, onShare, o
       </div>
 
       {/* Center Column: Content Editor */}
-      <div className="flex-1 flex flex-col relative bg-[var(--bg-main)]">
+      <div className={cn(
+        "flex-1 flex flex-col relative bg-[var(--bg-main)]",
+        !activeAsset ? "hidden md:flex" : "flex"
+      )}>
         {activeAsset ? (
           <>
-            <div className="h-20 flex items-center justify-between px-8 border-b border-[var(--card-border)] bg-[var(--bg-main)]/80 backdrop-blur-md sticky top-0 z-10">
-              <div className="flex items-center gap-4">
-                <h2 className="text-xl font-bold text-[var(--text-main)] tracking-tight">{activeAsset.title}</h2>
+            <div className="h-20 flex items-center justify-between px-4 md:px-8 border-b border-[var(--card-border)] bg-[var(--bg-main)]/80 backdrop-blur-md sticky top-0 z-10">
+              <div className="flex items-center gap-2 md:gap-4">
+                <button 
+                  onClick={() => setActiveAsset(null)}
+                  className="md:hidden p-2 text-[var(--text-secondary)] hover:text-[var(--text-main)] transition-colors cf-focus min-w-[44px] min-h-[44px] flex items-center justify-center"
+                  aria-label="Back to library"
+                >
+                  <X className="w-5 h-5" aria-hidden="true" />
+                </button>
+                <h2 className="text-lg md:text-xl font-bold text-[var(--text-main)] tracking-tight truncate max-w-[150px] sm:max-w-[200px] md:max-w-none">{activeAsset.title}</h2>
               </div>
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2 md:gap-3">
                 <button 
                   onClick={() => setShowShareModal(true)}
-                  className="px-4 py-2 bg-[var(--card-bg)] border border-[var(--card-border)] rounded-xl text-sm font-medium text-[var(--text-main)] hover:border-[var(--accent-human)]/30 transition-colors flex items-center gap-2 shadow-sm cf-focus min-h-[44px]"
+                  className="px-3 md:px-4 py-2 bg-[var(--card-bg)] border border-[var(--card-border)] rounded-xl text-sm font-medium text-[var(--text-main)] hover:border-[var(--accent-human)]/30 transition-colors flex items-center gap-2 shadow-sm cf-focus min-h-[44px]"
                   aria-label="Share to Chat"
                 >
                   <Share2 className="w-4 h-4" aria-hidden="true" />
-                  Share to Chat
+                  <span className="hidden sm:inline">Share to Chat</span>
+                  <span className="sm:hidden">Share</span>
                 </button>
                 <button 
-                  className="px-4 py-2 bg-[var(--accent-human)] text-white rounded-xl text-sm font-medium hover:bg-[var(--accent-human)]/90 transition-colors flex items-center gap-2 shadow-sm luminous-button cf-focus min-h-[44px]"
+                  className="px-3 md:px-4 py-2 bg-[var(--accent-human)] text-white rounded-xl text-sm font-medium hover:bg-[var(--accent-human)]/90 transition-colors flex items-center gap-2 shadow-sm luminous-button cf-focus min-h-[44px]"
                   aria-label="Publish asset"
                 >
                   <Globe className="w-4 h-4" aria-hidden="true" />
-                  Publish
+                  <span className="hidden sm:inline">Publish</span>
                 </button>
               </div>
             </div>
@@ -144,27 +158,30 @@ export default function CMSLibrary({ assets, channels, onAssetSelect, onShare, o
             </div>
 
             {/* Floating AI Writer Toolbar */}
-            <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
+            <div className="absolute bottom-8 left-1/2 -translate-x-1/2 w-[90%] md:w-auto max-w-md">
               <motion.div 
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                className="glass-panel p-2 flex items-center gap-2 rounded-2xl shadow-[var(--shadow-glass-lg)] border border-[var(--accent-ai)]/20 bg-[var(--card-bg)]/80 backdrop-blur-xl"
+                className="glass-panel p-2 flex items-center justify-between md:justify-start gap-1 md:gap-2 rounded-2xl shadow-[var(--shadow-glass-lg)] border border-[var(--accent-ai)]/20 bg-[var(--card-bg)]/80 backdrop-blur-xl overflow-x-auto"
               >
-                <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-[var(--accent-ai)] to-[var(--accent-human)] flex items-center justify-center agent-glow shadow-[var(--shadow-glow-cyan)]">
+                <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-[var(--accent-ai)] to-[var(--accent-human)] flex items-center justify-center agent-glow shadow-[var(--shadow-glow-cyan)] shrink-0">
                   <Zap className="w-4 h-4 text-white" aria-hidden="true" />
                 </div>
-                <div className="h-6 w-px bg-[var(--card-border)] mx-1" />
-                <button className="px-3 py-1.5 hover:bg-[var(--bg-stream)] rounded-lg text-sm font-medium text-[var(--text-main)] transition-colors flex items-center gap-2 cf-focus min-h-[44px]">
+                <div className="h-6 w-px bg-[var(--card-border)] mx-1 shrink-0" />
+                <button className="px-2 md:px-3 py-1.5 hover:bg-[var(--bg-stream)] rounded-lg text-xs md:text-sm font-medium text-[var(--text-main)] transition-colors flex items-center gap-1 md:gap-2 cf-focus min-h-[44px] shrink-0">
                   <Edit3 className="w-4 h-4 text-[var(--accent-ai)]" aria-hidden="true" />
-                  Generate Draft
+                  <span className="hidden sm:inline">Generate Draft</span>
+                  <span className="sm:hidden">Draft</span>
                 </button>
-                <button className="px-3 py-1.5 hover:bg-[var(--bg-stream)] rounded-lg text-sm font-medium text-[var(--text-main)] transition-colors flex items-center gap-2 cf-focus min-h-[44px]">
+                <button className="px-2 md:px-3 py-1.5 hover:bg-[var(--bg-stream)] rounded-lg text-xs md:text-sm font-medium text-[var(--text-main)] transition-colors flex items-center gap-1 md:gap-2 cf-focus min-h-[44px] shrink-0">
                   <FileText className="w-4 h-4 text-[var(--accent-ai)]" aria-hidden="true" />
-                  Contextualize
+                  <span className="hidden sm:inline">Contextualize</span>
+                  <span className="sm:hidden">Context</span>
                 </button>
-                <button className="px-3 py-1.5 hover:bg-[var(--bg-stream)] rounded-lg text-sm font-medium text-[var(--text-main)] transition-colors flex items-center gap-2 cf-focus min-h-[44px]">
+                <button className="px-2 md:px-3 py-1.5 hover:bg-[var(--bg-stream)] rounded-lg text-xs md:text-sm font-medium text-[var(--text-main)] transition-colors flex items-center gap-1 md:gap-2 cf-focus min-h-[44px] shrink-0">
                   <CheckCircle2 className="w-4 h-4 text-[var(--accent-ai)]" aria-hidden="true" />
-                  Optimize SEO
+                  <span className="hidden sm:inline">Optimize SEO</span>
+                  <span className="sm:hidden">SEO</span>
                 </button>
               </motion.div>
             </div>
@@ -178,7 +195,7 @@ export default function CMSLibrary({ assets, channels, onAssetSelect, onShare, o
 
       {/* Right Column: AI Optimizer & Live Preview */}
       {activeAsset && (
-        <div className="w-96 flex flex-col border-l border-[var(--card-border)] bg-[var(--sidebar-bg)]">
+        <div className="hidden lg:flex w-96 flex-col border-l border-[var(--card-border)] bg-[var(--sidebar-bg)]">
           <div className="p-6 border-b border-[var(--card-border)]">
             <h3 className="text-lg font-bold text-[var(--text-main)] tracking-tight flex items-center gap-2">
               <Zap className="w-5 h-5 text-[var(--accent-ai)]" />

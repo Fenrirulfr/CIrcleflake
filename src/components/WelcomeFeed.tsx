@@ -22,41 +22,43 @@ export default function WelcomeFeed({ onNavigate }: WelcomeFeedProps) {
 
   return (
     <div className="flex-1 flex flex-col h-full bg-[var(--bg-stream)] overflow-y-auto">
-      <header className="h-20 flex items-center px-8 border-b border-[var(--card-border)] bg-[var(--bg-main)]/80 backdrop-blur-md sticky top-0 z-10">
-        <div className="flex items-center gap-4">
-          <div className="w-10 h-10 rounded-xl bg-[var(--card-bg)] border border-[var(--card-border)] flex items-center justify-center">
-            <Activity className="w-5 h-5 text-[var(--accent-ai)]" />
+      <header className="h-20 flex items-center px-4 md:px-8 border-b border-[var(--card-border)] bg-[var(--bg-main)]/80 backdrop-blur-md sticky top-0 z-10">
+        <div className="flex items-center gap-2 md:gap-4">
+          <div className="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-[var(--card-bg)] border border-[var(--card-border)] flex items-center justify-center">
+            <Activity className="w-4 h-4 md:w-5 md:h-5 text-[var(--accent-ai)]" />
           </div>
           <div>
-            <h2 className="text-lg font-bold text-[var(--text-main)] tracking-tight leading-none">Welcome Feed</h2>
-            <p className="micro-label mt-1 text-[var(--text-secondary)]">Your Workspace Overview</p>
+            <h2 className="text-base md:text-lg font-bold text-[var(--text-main)] tracking-tight leading-none">Welcome Feed</h2>
+            <p className="micro-label mt-1 text-[var(--text-secondary)] hidden sm:block">Your Workspace Overview</p>
           </div>
         </div>
       </header>
 
-      <div className="flex-1 p-8 max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="flex-1 p-4 md:p-8 max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8">
         {/* Left Column: Recent Activity Feed */}
         <div className="lg:col-span-2 space-y-6">
-          <div className="flex items-center justify-between">
-            <h3 className="text-xl font-bold text-[var(--text-main)] tracking-tight">Recent Activity</h3>
-            <div className="flex gap-3">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <h3 className="text-lg md:text-xl font-bold text-[var(--text-main)] tracking-tight">Recent Activity</h3>
+            <div className="flex gap-2 md:gap-3">
               <motion.button 
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={() => onNavigate('dashboard')}
-                className="px-4 py-2 bg-[var(--card-bg)] border border-[var(--card-border)] rounded-xl text-sm font-medium text-[var(--text-main)] hover:border-[var(--accent-human)]/30 transition-colors flex items-center gap-2 shadow-sm cf-focus min-h-[44px]"
+                className="px-3 md:px-4 py-2 bg-[var(--card-bg)] border border-[var(--card-border)] rounded-xl text-xs md:text-sm font-medium text-[var(--text-main)] hover:border-[var(--accent-human)]/30 transition-colors flex items-center gap-1 md:gap-2 shadow-sm cf-focus min-h-[44px] flex-1 sm:flex-none justify-center"
               >
                 <MessageSquare className="w-4 h-4" aria-hidden="true" />
-                New Thread
+                <span className="hidden sm:inline">New Thread</span>
+                <span className="sm:hidden">Thread</span>
               </motion.button>
               <motion.button 
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={() => onNavigate('cms')}
-                className="px-4 py-2 bg-[var(--accent-human)] text-white rounded-xl text-sm font-medium hover:bg-[var(--accent-human)]/90 transition-colors flex items-center gap-2 shadow-sm luminous-button cf-focus min-h-[44px]"
+                className="px-3 md:px-4 py-2 bg-[var(--accent-human)] text-white rounded-xl text-xs md:text-sm font-medium hover:bg-[var(--accent-human)]/90 transition-colors flex items-center gap-1 md:gap-2 shadow-sm luminous-button cf-focus min-h-[44px] flex-1 sm:flex-none justify-center"
               >
                 <Plus className="w-4 h-4" aria-hidden="true" />
-                New CMS Draft
+                <span className="hidden sm:inline">New CMS Draft</span>
+                <span className="sm:hidden">Draft</span>
               </motion.button>
             </div>
           </div>

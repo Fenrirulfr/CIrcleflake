@@ -26,7 +26,7 @@ interface SidebarProps {
 export default function Sidebar({ channels, activeChannel, onChannelSelect, isOpen, activeView, onViewChange, isDarkMode, toggleTheme }: SidebarProps) {
   return (
     <div className={cn(
-      "w-64 glass-sidebar flex flex-col transition-all duration-300",
+      "w-64 h-full glass-sidebar flex flex-col transition-all duration-300",
       !isOpen && "w-0 overflow-hidden border-none"
     )}>
       <div className="p-6">
