@@ -11,7 +11,7 @@ export default function ThemeToggle({ isDarkMode, toggleTheme }: ThemeToggleProp
   return (
     <button
       onClick={toggleTheme}
-      className={`relative w-16 h-9 rounded-full p-1 transition-all duration-500 focus:outline-none focus:ring-2 focus:ring-[var(--accent-human)]/50 ${
+      className={`relative w-16 h-9 rounded-full p-1 transition-all duration-500 cf-focus min-h-[44px] ${
         isDarkMode 
           ? 'bg-[var(--card-bg)] border border-[var(--card-border)] shadow-inner' 
           : 'bg-[var(--bg-stream)] border border-[var(--card-border)] shadow-inner'
@@ -20,8 +20,8 @@ export default function ThemeToggle({ isDarkMode, toggleTheme }: ThemeToggleProp
     >
       {/* Background Icons (Stationary) */}
       <div className="absolute inset-0 flex items-center justify-between px-2.5 pointer-events-none">
-        <Sun className={`w-3.5 h-3.5 transition-opacity duration-300 ${isDarkMode ? 'text-[var(--text-secondary)] opacity-100' : 'opacity-0'}`} />
-        <Moon className={`w-3.5 h-3.5 transition-opacity duration-300 ${!isDarkMode ? 'text-[var(--text-secondary)] opacity-100' : 'opacity-0'}`} />
+        <Sun className={`w-3.5 h-3.5 transition-opacity duration-300 ${isDarkMode ? 'text-[var(--text-secondary)] opacity-100' : 'opacity-0'}`} aria-hidden="true" />
+        <Moon className={`w-3.5 h-3.5 transition-opacity duration-300 ${!isDarkMode ? 'text-[var(--text-secondary)] opacity-100' : 'opacity-0'}`} aria-hidden="true" />
       </div>
 
       {/* Sliding Knob */}
@@ -36,7 +36,7 @@ export default function ThemeToggle({ isDarkMode, toggleTheme }: ThemeToggleProp
           transition={{ duration: 0.2 }}
           className="absolute inset-0 flex items-center justify-center"
         >
-          <Moon className="w-4 h-4 text-[var(--accent-human)] fill-[var(--accent-human)]/10" />
+          <Moon className="w-4 h-4 text-[var(--accent-human)] fill-[var(--accent-human)]/10" aria-hidden="true" />
         </motion.div>
         
         <motion.div
@@ -45,7 +45,7 @@ export default function ThemeToggle({ isDarkMode, toggleTheme }: ThemeToggleProp
           transition={{ duration: 0.2 }}
           className="absolute inset-0 flex items-center justify-center"
         >
-          <Sun className="w-4 h-4 text-amber-500 fill-amber-500/10" />
+          <Sun className="w-4 h-4 text-amber-500 fill-amber-500/10" aria-hidden="true" />
         </motion.div>
       </motion.div>
     </button>

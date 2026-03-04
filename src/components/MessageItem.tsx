@@ -119,7 +119,7 @@ export default function MessageItem({ message, isReply, onAssetSelect }: Message
             <div className="absolute -top-10 -right-10 w-20 h-20 bg-[var(--accent-ai)]/20 rounded-full blur-2xl group-hover/summary:bg-[var(--accent-ai)]/30 transition-colors duration-700" />
             <div className="relative z-10">
               <div className="flex items-center gap-2 mb-3">
-                <Bot className="w-4 h-4 text-[var(--accent-ai)]" />
+                <Bot className="w-4 h-4 text-[var(--accent-ai)]" aria-hidden="true" />
                 <span className="text-xs font-bold text-[var(--accent-ai)] uppercase tracking-widest">AI Summary</span>
               </div>
               <div className="text-sm text-[var(--text-main)] leading-relaxed whitespace-pre-line">
@@ -131,7 +131,7 @@ export default function MessageItem({ message, isReply, onAssetSelect }: Message
 
         {isAgent && message.content.includes('Published') && (
           <div className="mt-4 flex items-center gap-2 text-emerald-400 text-[10px] font-bold uppercase tracking-[0.2em] bg-emerald-500/5 px-3 py-1.5 rounded-lg border border-emerald-500/10 w-fit">
-            <CheckCircle2 className="w-3.5 h-3.5" />
+            <CheckCircle2 className="w-3.5 h-3.5" aria-hidden="true" />
             Action Verified via MCP
           </div>
         )}

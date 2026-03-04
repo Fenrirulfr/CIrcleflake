@@ -73,9 +73,10 @@ export default function ChatStream({ messages, onSendMessage, onAssetSelect, isA
         <div className="absolute top-4 right-4 z-10">
           <button 
             onClick={() => onSendMessage('/summarize')}
-            className="px-3 py-1.5 bg-[var(--card-bg)] border border-[var(--accent-ai)]/30 rounded-lg text-xs font-bold text-[var(--accent-ai)] hover:bg-[var(--accent-ai)]/10 transition-colors flex items-center gap-2 shadow-sm"
+            className="px-3 py-1.5 bg-[var(--card-bg)] border border-[var(--accent-ai)]/30 rounded-lg text-xs font-bold text-[var(--accent-ai)] hover:bg-[var(--accent-ai)]/10 transition-colors flex items-center gap-2 shadow-sm cf-focus min-h-[44px]"
+            aria-label="Generate thread summary"
           >
-            <Zap className="w-3 h-3" />
+            <Zap className="w-3 h-3" aria-hidden="true" />
             Thread Summary
           </button>
         </div>

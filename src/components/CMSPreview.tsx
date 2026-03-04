@@ -46,10 +46,11 @@ export default function CMSPreview({ asset, allAssets, onAssetSelect }: CMSPrevi
                 key={a.id}
                 whileHover={{ x: 4, backgroundColor: 'rgba(255,255,255,0.03)' }}
                 onClick={() => onAssetSelect(a)}
-                className="w-full flex items-center gap-4 p-4 rounded-2xl transition-all group text-left border border-transparent hover:border-[var(--card-border)] hover:bg-[var(--bg-stream)]"
+                className="w-full flex items-center gap-4 p-4 rounded-2xl transition-all group text-left border border-transparent hover:border-[var(--card-border)] hover:bg-[var(--bg-stream)] cf-focus min-h-[44px]"
+                aria-label={`Select asset ${a.title}`}
               >
                 <div className="w-10 h-10 bg-[var(--card-bg)] rounded-xl flex items-center justify-center group-hover:bg-[var(--accent-ai)]/10 transition-colors border border-[var(--card-border)]">
-                  <FileText className="w-5 h-5 text-[var(--text-secondary)] group-hover:text-[var(--accent-ai)] transition-colors" />
+                  <FileText className="w-5 h-5 text-[var(--text-secondary)] group-hover:text-[var(--accent-ai)] transition-colors" aria-hidden="true" />
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-bold text-[var(--text-main)] truncate group-hover:text-[var(--accent-human)] transition-colors">{a.title}</p>
@@ -60,9 +61,9 @@ export default function CMSPreview({ asset, allAssets, onAssetSelect }: CMSPrevi
           </div>
           <motion.button 
             whileHover={{ scale: 1.02 }}
-            className="w-full flex items-center justify-center gap-3 p-4 rounded-2xl border border-dashed border-[var(--card-border)] text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:border-[var(--accent-human)]/30 hover:bg-[var(--bg-stream)] transition-all group"
+            className="w-full flex items-center justify-center gap-3 p-4 rounded-2xl border border-dashed border-[var(--card-border)] text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:border-[var(--accent-human)]/30 hover:bg-[var(--bg-stream)] transition-all group cf-focus min-h-[44px]"
           >
-            <Plus className="w-4 h-4 group-hover:rotate-90 transition-transform" />
+            <Plus className="w-4 h-4 group-hover:rotate-90 transition-transform" aria-hidden="true" />
             <span className="text-sm font-bold">Initialize New Asset</span>
           </motion.button>
         </div>
@@ -89,15 +90,17 @@ export default function CMSPreview({ asset, allAssets, onAssetSelect }: CMSPrevi
         <div className="flex items-center gap-1">
           <motion.button 
             whileHover={{ scale: 1.1 }}
-            className="p-2 hover:bg-[var(--bg-stream)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-main)] transition-colors"
+            className="p-2 hover:bg-[var(--bg-stream)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-main)] transition-colors cf-focus min-w-[44px] min-h-[44px] flex items-center justify-center"
+            aria-label="Share asset"
           >
-            <Share2 className="w-4 h-4" />
+            <Share2 className="w-4 h-4" aria-hidden="true" />
           </motion.button>
           <motion.button 
             whileHover={{ scale: 1.1 }}
-            className="p-2 hover:bg-[var(--bg-stream)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-main)] transition-colors"
+            className="p-2 hover:bg-[var(--bg-stream)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-main)] transition-colors cf-focus min-w-[44px] min-h-[44px] flex items-center justify-center"
+            aria-label="More options"
           >
-            <MoreVertical className="w-4 h-4" />
+            <MoreVertical className="w-4 h-4" aria-hidden="true" />
           </motion.button>
         </div>
       </div>

@@ -69,10 +69,11 @@ export default function CommandBar({ onSelect, onClose, filter = '' }: CommandBa
           <button
             key={cmd.id}
             onClick={() => onSelect(`/${cmd.id}`)}
-            className="w-full flex items-center gap-4 p-3.5 rounded-xl hover:bg-[var(--bg-stream)] transition-all group text-left relative overflow-hidden"
+            className="w-full flex items-center gap-4 p-3.5 rounded-xl hover:bg-[var(--bg-stream)] transition-all group text-left relative overflow-hidden cf-focus min-h-[44px]"
+            aria-label={`Select command ${cmd.name}`}
           >
             <div className="w-11 h-11 rounded-xl bg-[var(--card-bg)] flex items-center justify-center group-hover:bg-[var(--accent-human)]/10 transition-all duration-500 border border-[var(--card-border)] group-hover:border-[var(--accent-human)]/30">
-              <cmd.icon className="w-5 h-5 text-[var(--text-secondary)] group-hover:text-[var(--accent-human)] transition-colors" />
+              <cmd.icon className="w-5 h-5 text-[var(--text-secondary)] group-hover:text-[var(--accent-human)] transition-colors" aria-hidden="true" />
             </div>
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2 mb-0.5">

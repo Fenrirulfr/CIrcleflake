@@ -23,6 +23,9 @@ export default function ProcessingOverlay({ isProcessing, steps }: ProcessingOve
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="processing-title"
         >
           <motion.div
             initial={{ scale: 0.95, y: 20 }}
@@ -31,16 +34,16 @@ export default function ProcessingOverlay({ isProcessing, steps }: ProcessingOve
             className={cn(
               "w-full max-w-md p-6 rounded-2xl bg-[var(--card-bg)] shadow-2xl",
               "border-2",
-              "dark:border-[var(--accent-ai)] dark:shadow-[var(--shadow-glow-cyan)] dark:animate-pulse-slow",
+              "dark:border-[var(--accent-ai)] dark:shadow-[var(--shadow-glow-cyan)] dark:animate-pulse-slow motion-reduce:animate-none",
               "border-[#0ea5e9]" // Electric Blue in light mode
             )}
           >
             <div className="flex items-center gap-3 mb-6">
               <div className="w-10 h-10 rounded-xl bg-[var(--accent-ai)]/10 flex items-center justify-center">
-                <Zap className="w-5 h-5 text-[var(--accent-ai)]" />
+                <Zap className="w-5 h-5 text-[var(--accent-ai)]" aria-hidden="true" />
               </div>
               <div>
-                <h3 className="text-lg font-bold text-[var(--text-main)] tracking-tight">Agent Processing</h3>
+                <h3 id="processing-title" className="text-lg font-bold text-[var(--text-main)] tracking-tight">Agent Processing</h3>
                 <p className="text-xs text-[var(--text-secondary)] uppercase tracking-widest">Executing Workflow</p>
               </div>
             </div>
@@ -50,11 +53,11 @@ export default function ProcessingOverlay({ isProcessing, steps }: ProcessingOve
                 <div key={step.id} className="flex items-start gap-3">
                   <div className="mt-0.5">
                     {step.status === 'completed' ? (
-                      <CheckCircle2 className="w-5 h-5 text-emerald-500" />
+                      <CheckCircle2 className="w-5 h-5 text-emerald-500" aria-hidden="true" />
                     ) : step.status === 'active' ? (
-                      <Loader2 className="w-5 h-5 text-[var(--accent-ai)] animate-spin" />
+                      <Loader2 className="w-5 h-5 text-[var(--accent-ai)] animate-spin motion-reduce:animate-none" aria-hidden="true" />
                     ) : (
-                      <Circle className="w-5 h-5 text-[var(--text-secondary)]/50" />
+                      <Circle className="w-5 h-5 text-[var(--text-secondary)]/50" aria-hidden="true" />
                     )}
                   </div>
                   <div>

@@ -44,18 +44,18 @@ export default function WelcomeFeed({ onNavigate }: WelcomeFeedProps) {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={() => onNavigate('dashboard')}
-                className="px-4 py-2 bg-[var(--card-bg)] border border-[var(--card-border)] rounded-xl text-sm font-medium text-[var(--text-main)] hover:border-[var(--accent-human)]/30 transition-colors flex items-center gap-2 shadow-sm"
+                className="px-4 py-2 bg-[var(--card-bg)] border border-[var(--card-border)] rounded-xl text-sm font-medium text-[var(--text-main)] hover:border-[var(--accent-human)]/30 transition-colors flex items-center gap-2 shadow-sm cf-focus min-h-[44px]"
               >
-                <MessageSquare className="w-4 h-4" />
+                <MessageSquare className="w-4 h-4" aria-hidden="true" />
                 New Thread
               </motion.button>
               <motion.button 
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={() => onNavigate('cms')}
-                className="px-4 py-2 bg-[var(--accent-human)] text-white rounded-xl text-sm font-medium hover:bg-[var(--accent-human)]/90 transition-colors flex items-center gap-2 shadow-sm luminous-button"
+                className="px-4 py-2 bg-[var(--accent-human)] text-white rounded-xl text-sm font-medium hover:bg-[var(--accent-human)]/90 transition-colors flex items-center gap-2 shadow-sm luminous-button cf-focus min-h-[44px]"
               >
-                <Plus className="w-4 h-4" />
+                <Plus className="w-4 h-4" aria-hidden="true" />
                 New CMS Draft
               </motion.button>
             </div>
@@ -69,10 +69,19 @@ export default function WelcomeFeed({ onNavigate }: WelcomeFeedProps) {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.1 }}
                 onClick={() => onNavigate(item.type === 'cms' ? 'cms' : 'dashboard', item.id)}
-                className="glass-panel p-5 cursor-pointer group flex items-start gap-4"
+                className="glass-panel p-5 cursor-pointer group flex items-start gap-4 cf-focus min-h-[44px]"
+                tabIndex={0}
+                role="button"
+                aria-label={`View ${item.title}`}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    onNavigate(item.type === 'cms' ? 'cms' : 'dashboard', item.id);
+                  }
+                }}
               >
                 <div className={cn("w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0", item.bg)}>
-                  <item.icon className={cn("w-5 h-5", item.color)} />
+                  <item.icon className={cn("w-5 h-5", item.color)} aria-hidden="true" />
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center justify-between mb-1">
@@ -82,7 +91,7 @@ export default function WelcomeFeed({ onNavigate }: WelcomeFeedProps) {
                   <p className="text-sm text-[var(--text-secondary)] truncate">{item.desc}</p>
                 </div>
                 <div className="self-center opacity-0 group-hover:opacity-100 transition-opacity">
-                  <ArrowRight className="w-5 h-5 text-[var(--accent-human)]" />
+                  <ArrowRight className="w-5 h-5 text-[var(--accent-human)]" aria-hidden="true" />
                 </div>
               </motion.div>
             ))}
@@ -131,7 +140,7 @@ export default function WelcomeFeed({ onNavigate }: WelcomeFeedProps) {
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="w-full py-2.5 bg-[var(--accent-ai)]/10 text-[var(--accent-ai)] hover:bg-[var(--accent-ai)]/20 border border-[var(--accent-ai)]/20 rounded-xl text-sm font-bold transition-colors"
+                className="w-full py-2.5 bg-[var(--accent-ai)]/10 text-[var(--accent-ai)] hover:bg-[var(--accent-ai)]/20 border border-[var(--accent-ai)]/20 rounded-xl text-sm font-bold transition-colors cf-focus min-h-[44px]"
               >
                 View Full Analytics
               </motion.button>
